@@ -78,7 +78,58 @@ class DataValidation:
                     "drift_status":is_found
                 }})
 
-                drift_report_file_path = 
+            drift_report_file_path = self.data_validation_config.drift_report_file_path
+            os.makedirs(os.path.dirname(drift_report_file_path),exist_ok= True)
+            write_yaml_file(file_path=drift_report_file_path,content=report)
+            return status
         except Exception as e:
             raise CreditException(e,sys)
 
+
+    def initiate_data_validation(self)-> DataValidationArtifact:
+        try:
+            error_message = ""
+            train_file_path = self.data_ingestion_artifact.trained_file_path
+            test_file_path = self.data_ingestion_artifact.test_file_path
+
+            # Read train and test dataframes
+            logging.info(f"Reading data from train and test locations started")
+            train_dataframe = DataValidation.read_data(file_path = train_file_path)
+            test_dataframe = DataValidation.read_data(file_path=test_file_path)
+
+            # Validate columns
+            logging.info(f" validation of number of columns started")
+            status = self.validate_number_of_columns(dataframe=train_dataframe)
+            if not status:
+                error_message = f"{error_message} train dataframe does not contain all the columns. \n"
+            status = self.validate_number_of_columns(dataframe=test_dataframe)
+            if not status:
+                error_message = f"{error_message} test dataframe does not contain all the columns. \n"
+            
+            # Validate numerical columns
+            logging.info(f" validation of numerical columns started")
+            status = self.is_numerical_column_exist(dataframe=train_dataframe)
+            if not status:
+                error_message = f"{error_message} train dataframe does not contain all numerical columns. \n"
+            status = self.is_numerical_column_exist(dataframe=test_dataframe)
+            if not status:
+                error_message = f"{error_message} test dataframe does not contain all numerical columns. \n"
+            
+            # lets check data drift
+            status = self.detect_data_drift(base_df=train_dataframe,current_df=test_dataframe)
+
+            data_validation_artifact = DataValidationArtifact(
+                validation_status=status,
+                valid_train_file_path=self.data_ingestion_artifact.trained_file_path,
+                valid_test_file_path=self.data_ingestion_artifact.test_file_path,
+                invalid_train_file_path=None,
+                invalid_test_file_path=None,
+                drift_report_file_path=self.data_validation_config.drift_report_file_path,
+            )
+
+            logging.info(f"Data validation artifact: {data_validation_artifact}")
+            logging.info(f"{'>>'*10} Data Validation Completed{'<<'*10}")
+
+            return data_validation_artifact
+        except Exception as e:
+            raise CreditException(e,sys)

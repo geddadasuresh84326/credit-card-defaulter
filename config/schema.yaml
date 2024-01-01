@@ -25,8 +25,9 @@ columns:
   - PAY_AMT6: int
   - default.payment.next.month: int
 
+
 numerical_columns:
-    - ID
+  - ID
   - LIMIT_BAL
   - SEX
   - EDUCATION
