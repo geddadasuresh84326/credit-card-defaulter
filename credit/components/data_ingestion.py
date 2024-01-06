@@ -64,7 +64,7 @@ class DataIngestion:
             )
 
             logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
-            logging.info(f"{'>>'*10}Data Ingestion completed{'<<'*10}")
+            logging.info(f"{'>>'*10}Data Ingestion Completed{'<<'*10}")
             return data_ingestion_artifact
 
         except Exception as e:
