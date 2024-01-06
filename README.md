@@ -11,7 +11,7 @@
 3. Git Actions
 
 ## How to run?
-Before we run the project, we need AWS account to access the service like S3, ECR and EC2 instances.
+Before we run the project, we need AWS account to access the service like ECR and EC2 instances.
 
 
 ## Project Archietecture
