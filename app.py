@@ -13,7 +13,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET','POST'])
 def predict():
 
     """Get the user input from the form """
