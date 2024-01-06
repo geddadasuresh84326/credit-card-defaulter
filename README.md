@@ -6,11 +6,9 @@
 
 ## Infrastructure Required.
 
-1. AWS S3
-2. AWS EC2
-3. AWS ECR
-4. Git Actions
-5. Terraform
+1. AWS EC2
+2. AWS ECR
+3. Git Actions
 
 ## How to run?
 Before we run the project, we need AWS account to access the service like S3, ECR and EC2 instances.
