@@ -78,7 +78,7 @@ def predict():
     if prediction == 1:
         result = "The credit card holder will be Defaulter in the next month"
     else:
-        result = "The Credit card holder will not be Defaulter in the next month"
+        result = "The credit card holder will not be Defaulter in the next month"
 
     return render_template('index.html', prediction_text = result)
 
