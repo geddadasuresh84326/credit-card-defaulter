@@ -17,14 +17,25 @@
   background-color: #f1ecec;
 } */
 html{
-	font-size: 90%;
+	font-size: 95%;
 }
 body {
   font-family: "Rubik", sans-serif;
   line-height: 1;
   font-weight: 400;
-  color: #555;
+  color: #161515;
   position: relative;
+  background-color: rgb(175, 175, 223);
+  border: 5px solid #555;
+}
+.header{
+	margin: 20px;
+	color: rgb(133, 238, 13);
+	font-weight: 800;
+	width: 90%; 
+	padding: 1%; 
+	/* border: 5px solid;  */
+	text-align: center;
 }
 /* .result {
     margin: auto;
@@ -33,9 +44,10 @@ body {
 } */
 .container{
 	display: flex;
+	max-width: 1250px;
 }
 .response_box{
-	flex: 1 1 350px;
+	flex: 1 1 300px;
 	margin-top: 120px;
 	border-color:2px solid #555;
 }
@@ -47,9 +59,10 @@ body {
 
 </style>
 <body>
-	<h2 style="margin: auto; width: 90%; padding: 1%; border: 2px solid; text-align: center;">Credit Card Defaulter Prediction</h2>
+	<h2 class="header">Creditcard Defaulter Prediction</h2>
 
      <!-- Main Input For Receiving Query to our ML -->
+	
 	<div class="container">
 	<div>
     <form action="/predict"method="post">
@@ -88,6 +101,7 @@ body {
 			<p><b>Limit Balance:</b>
 			Amount of given credit in dollar (includes individual and family/supplementary credit)</p>
 			<input type="text" name="limit_bal" placeholder="amount in dollar" required="required" />
+			<br><br>
 			<div class="repay_status_parent">
 				<p><b>Repayment Status:</b>
 				(-1=pay duly, 1=one month delay, 2=two months delay, … 9=delay for nine months and above)</p>						
@@ -118,6 +132,8 @@ body {
 			</div>
 			<br>
 			<br>
+			<br>
+			<br>
 			<div class="bill_amount_parent">
 				<p><b>Bill Amounts:</b> Amount of bill statements (in dollar)</p>
 				<div style="float:left; margin-right: 1.5em;">
@@ -145,6 +161,8 @@ body {
 					<input name="bill_amt1" class="custom-text-box" id="bill_amt1" value="0" type="text" required>
 				</div>
 			</div>
+			<br>
+			<br>
 			<br>
 			<br>
 			<div class="previous_payments_parent">
@@ -177,8 +195,9 @@ body {
 			<br>
 			<br>
 			<br>
+			<br>
 		<div style="text-align:center;">
-			<button type="submit" class="btn btn-primary btn-block btn-large"><b>Predict</b></button>
+			<button type="submit" class="btn btn-primary"><b>Predict</b></button>
 		</div>
     </form>
 	</div>
