@@ -5,8 +5,11 @@ venv
 logs
 infrastructure
 docs
-sensor.egg-info
+credit.egg-info
 LICENSE
 README.md
 notebooks
 scripts
+flowcharts
+UCI_Credit_Card.csv
+data_dump.py
