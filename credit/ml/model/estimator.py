@@ -13,6 +13,14 @@ class ModelResolver:
             raise CreditException(e,sys)
     
     def get_best_model_path(self)->str:
+        """
+        Description: This function is used to get the best model path
+        =========================================================
+        Params:
+    
+        =========================================================
+        return : path of the best model
+        """
         try:
             logging.info(f"Inside get_best_model_path function to get latest model path")
             timestamps = list(map(int,os.listdir(self.model_dir)))
@@ -24,6 +32,14 @@ class ModelResolver:
             raise CreditException(e,sys)
 
     def is_model_exists(self)->bool:
+        """
+        Description: This function is used to check whether the model is existed or not in a filepath
+        =========================================================
+        Params:
+        
+        =========================================================
+        return : True/False
+        """
         try:
             if not os.path.exists(self.model_dir):
                 return False

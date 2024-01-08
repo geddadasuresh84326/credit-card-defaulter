@@ -12,6 +12,14 @@ import shutil
 class ModelPusher:
     def __init__(self,model_evaluation_artifact:ModelEvaluationArtifact,
                  model_pusher_config:ModelPusherConfig):
+        """
+        Description: This is Model Pusher component
+        =========================================================
+        Params:
+        model_evaluation_artifact: requires model_evaluation_artifact
+        model_pusher_config  : requires model_pusher_config
+        =========================================================
+        """
         try:
             logging.info(f"{'>>'*10}  Model Pusher {'<<'*10}")
 
@@ -21,6 +29,13 @@ class ModelPusher:
             raise CreditException(e,sys)
     
     def initiate_model_pusher(self)->ModelPusherArtifact:
+        """
+        Description: This function is used to initiate the model pusher component
+        =========================================================
+        Params:
+        =========================================================
+        returns  ModelPusherArtifact
+        """
         try:
             trained_model_path = self.model_evaluation_artifact.trained_model_path
 

@@ -14,6 +14,14 @@ from credit.utils.main_utils import save_object
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,
                         data_transformation_artifact:DataTransformationArtifact):
+        """
+        Description: This is Model Trainer component
+        =========================================================
+        Params:
+        model_trainer_config: requires model_trainer_config
+        data_transformation_artifact  : requires data_transformation_artifact
+        =========================================================
+        """
         try:
             logging.info(f"{'>>'*10}  Model Training {'<<'*10}")
             self.model_trainer_config = model_trainer_config
@@ -22,9 +30,18 @@ class ModelTrainer:
             raise CreditException(e,sys)
     
     def train_model(self,x_train,y_train):
+        """
+        Description: This function is used to train the model
+        =========================================================
+        Params:
+        x_train: requires x_train
+        y_train: requires y_train
+        =========================================================
+        returns  trained model object
+        """
         try:
             logging.info(f"Inside train model function")
-            rfc_clf = RandomForestClassifier(n_estimators=20,oob_score=True,n_jobs=1,random_state=42,max_features=None,min_samples_leaf=10)
+            rfc_clf = RandomForestClassifier(max_depth= 20,min_samples_leaf=1,min_samples_split=5,n_estimators= 100)
             rfc_clf.fit(x_train,y_train)
 
             return rfc_clf
@@ -32,6 +49,13 @@ class ModelTrainer:
             raise CreditException(e,sys)
 
     def initiate_model_trainer(self)->ModelTrainerArtifact:
+        """
+        Description: This function is used to initiate the model trainer
+        =========================================================
+        Params:
+        =========================================================
+        returns  ModelTrainerArtifact
+        """
         try:
             logging.info(f"Getting trasformed train and test data filepaths")
             train_file_path = self.data_transformation_artifact.transformed_train_file_path

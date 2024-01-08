@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from credit.entity.config_entity import DataIngestionConfig,TrainingPipelineConfig
 from credit.entity.artifact_entity import DataIngestionArtifact
 from credit.constant.training_pipeline import FILE_NAME
-from credit.utils.main_utils import get_collection_as_dataframe
+from credit.utils.main_utils import get_collection_as_dataframe,resample_data
 
 class DataIngestion:
     def __init__(self, data_ingestion_config:DataIngestionConfig):
@@ -19,6 +19,14 @@ class DataIngestion:
             raise CreditException(e,sys) 
 
     def initiate_data_ingestion(self)->DataIngestionArtifact:
+        """
+        Description: This function return collection as dataframe
+        =========================================================
+        Params:
+        
+        =========================================================
+        return DataIngestionArtifact
+        """
         try:
             logging.info(f"Exporting collection data as pandas dataframe")
 
@@ -31,6 +39,8 @@ class DataIngestion:
 
             # replace na with NaN
             df.replace(to_replace="na",value=np.NAN,inplace=True)
+
+            df = resample_data(df=df)
 
             # save data in feature store
             logging.info("Create feature store folder if not available")

@@ -17,6 +17,15 @@ class ModelEvaluation:
     def __init__(self,model_evaluation_config:ModelEvaluationConfig,
                     model_trainer_artifact:ModelTrainerArtifact,
                     data_transformation_artifact:DataTransformationArtifact):
+        """
+        Description: This is Model Evaluation component
+        =========================================================
+        Params:
+        model_evaluation_config: requires model_evaluation_config
+        model_trainer_artifact  : requires model_trainer_artifact
+        data_transformation_artifact  : requires data_transformation_artifact
+        =========================================================
+        """
         try:
             logging.info(f"{'>>'*10}  Model Evaluation {'<<'*10}")
             self.model_evaluation_config = model_evaluation_config
@@ -27,6 +36,13 @@ class ModelEvaluation:
 
 
     def initiate_model_evaluation(self)->ModelEvaluationArtifact:
+        """
+        Description: This function is used to initiate the model evaluation
+        =========================================================
+        Params:
+        =========================================================
+        returns  ModelEvaluationArtifact
+        """
         try:
             valid_train_file_path = self.data_transformation_artifact.transformed_train_file_path
             valid_test_file_path = self.data_transformation_artifact.transformed_test_file_path

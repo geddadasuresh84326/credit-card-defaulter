@@ -13,6 +13,14 @@ from scipy.stats import ks_2samp
 class DataValidation:
     def __init__(self,data_ingestion_artifact:DataIngestionArtifact,
                  data_validation_config:DataValidationConfig):
+        """
+        Description: This is Data Validation component
+        =========================================================
+        Params:
+        data_ingestion_artifact: requires data_ingestion_artifact
+        data_validation_config  : requires data_validation_config
+        =========================================================
+        """
         try:
             logging.info(f"{'>>'*10} Data Validation {'<<'*10}")
             self.data_ingestion_artifact = data_ingestion_artifact
@@ -25,6 +33,14 @@ class DataValidation:
     def drop_zero_std_columns(self,dataframe):...
 
     def validate_number_of_columns(self,dataframe:pd.DataFrame)->bool:
+        """
+        Description: This function is used to validate the number of columns in a dataframe
+        =========================================================
+        Params:
+        file_path: requires Dataframe
+        =========================================================
+        returns True/False
+        """
         try:
             number_of_columns = len(self._schema_config["columns"])
             logging.info(f" Required number of columns : {number_of_columns}")
@@ -36,6 +52,14 @@ class DataValidation:
             raise CreditException(e,sys)
 
     def is_numerical_column_exist(self,dataframe:pd.DataFrame)->bool:
+        """
+        Description: This function is used to check the numerical columns existed or not
+        =========================================================
+        Params:
+        file_path: requires Dataframe
+        =========================================================
+        returns True/False
+        """
         try:
             numerical_columns = self._schema_config["numerical_columns"]
             dataframe_columns = dataframe.columns
@@ -55,12 +79,28 @@ class DataValidation:
     
     @staticmethod
     def read_data(file_path:str)->pd.DataFrame:
+        """
+        Description: This function is used to read the data
+        =========================================================
+        Params:
+        file_path: requires the path of data
+        =========================================================
+        returns pandas dataframe
+        """
         try:
             return pd.read_csv(file_path)
         except Exception as e:
             raise CreditException(e,sys)
     
     def detect_data_drift(self,base_df,current_df,threshold = 0.05)->bool:
+        """
+        Description: This function is used to find the datadrift
+        =========================================================
+        Params:
+        file_path: requires Dataframe
+        =========================================================
+        returns True/False
+        """
         try:
             status = True
             report = {}
@@ -87,6 +127,13 @@ class DataValidation:
 
 
     def initiate_data_validation(self)-> DataValidationArtifact:
+        """
+        Description: This function is used to initiate the data validation
+        =========================================================
+        Params:
+        =========================================================
+        returns  DataValidationArtifact
+        """
         try:
             error_message = ""
             train_file_path = self.data_ingestion_artifact.trained_file_path
